@@ -1,0 +1,238 @@
+    .error_req{
+      color: red;
+    }
+
+    .branch_comp{display: none}
+    textarea {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    }
+
+    .fc-content {
+        cursor: pointer;
+    }
+
+    .fc-content:hover {
+        background-color: #2e80d1;
+    }
+
+    span#requiredto {
+      color:red;
+      font-size:7pt;
+    }
+    label {
+      font-size: 10pt;
+    }
+
+    td {
+      color: #000;
+    }
+
+    td#iisno {
+      font-weight: bold;
+    }
+
+    .selectize-dropdown .optgroup-header{
+      font-weight:bold;
+    }
+
+      #buttonassign{
+        width:100%;
+        text-align:left;
+        background-color: #08507E;
+        color: #000;
+        border-color: #08507E;
+        color: #FFF;
+        font-size: 10pt;
+      }
+      #buttonassignsec{
+        width:100%;
+        text-align:left;
+        color: #000;
+        border-color: #EDEDF1;
+        font-size: 8pt;
+        margin-top: 10px;
+      }
+      #labelname{
+        padding: 3px 0px 3px 10px;
+        border-radius: 2px;
+        background-color: #535F6F;
+        font-weight:normal;
+        color:#FFF;
+        font-size: 10pt;
+        width:100%;
+      }
+      #btncaret{
+        float:right;
+        margin-top: 3px;
+      }
+      #btncaretsub{
+        float:right;
+        margin-top: 3px;
+      }
+      input.form-control {
+        font-size: 10pt;
+        color: #000;
+      }
+      .card.card-body {
+        padding: 0px 0px 10px 0px;
+        margin-bottom: 10px;
+      }
+      input.btn.btn-info.btn-sm {
+          font-size: 8pt;
+      }
+      div#colswreport {
+          margin-top: 10px;
+      }
+      a#processtravelorder {
+          font-size: 10pt;
+          color: #FFF;
+      }
+
+      a#rcvbtntravel {
+          color: #FFF;
+      }
+      textarea#company_address {
+          font-size: 10pt;
+          color: #000;
+      }
+      textarea#subject {
+        font-size: 10pt;
+        color: #000;
+      }
+      button.btn.btn-info.btn-sm {
+          font-size: 8pt;
+      }
+      button.btn.btn-warning.btn-sm {
+          font-size: 8pt;
+      }
+      button.btn.btn-success.btn-sm {
+          font-size: 8pt;
+      }
+      button.btn.btn-danger.btn-sm{
+          font-size: 8pt;
+      }
+      button.btn.btn-dark.btn-sm{
+          font-size: 8pt;
+      }
+      button#rcvbtn {
+          font-size: 8pt;
+      }
+      button#prcbtn {
+          font-size: 8pt;
+      }
+      button.btn.btn-secondary {
+          font-size: 8pt;
+      }
+      button.btn.btn-success {
+          font-size: 8pt;
+      }
+      button.btn.btn-danger {
+          font-size: 8pt;
+      }
+      button.btn.btn-dark {
+          font-size: 8pt;
+      }
+      a.btn.btn-success.btn-sm {
+         font-size: 8pt;
+      }
+      a.btn.btn-outline-dark {
+         font-size: 8pt;
+      }
+      button.btn.btn-primary {
+         font-size: 8pt;
+      }
+      textarea.form-control {
+        font-size: 10pt;
+        color: #000;
+      }
+      .modal-header {
+          background-color: #08507E!important;
+          color: #FFF!important;
+      }
+      .selectize-dropdown, .selectize-input, .selectize-input input {
+          font-size: 8pt !important;
+      }
+      select#comp_category_id {
+          font-size: 8pt !important;
+      }
+
+      select.form-control {
+        font-size: 8pt;
+      }
+      .table-responsive-custom {
+          width: 100%;
+          overflow-x: auto;
+      }
+
+      div#table-responsive {
+          margin-top: 10px;
+          border:1px solid #E3E6F0;
+          padding:10px;
+          border-radius:3px;
+      }
+
+      table#region_sections {
+          font-size: 10pt;
+          /* color: #000; */
+      }
+
+      table#all_trans_table{
+          font-size: 10pt;
+      }
+
+      table#account_credentials {
+          font-size: 10pt;
+          /* color: #000; */
+      }
+      table#user_accounts_table {
+          font-size: 10pt;
+          /* color: #000; */
+      }
+
+      table#region_plantilla {
+          font-size: 10pt;
+          /* color: #000; */
+      }
+
+      table#line_of_authority_table {
+          font-size: 10pt;
+          /* color: #000; */
+      }
+
+      table#all_trans_travel_ticket {
+          font-size: 10pt;
+      }
+
+      table#all_issued_trans_travel_ticket {
+          font-size: 10pt;
+      }
+
+      table#account_rights_table {
+          font-size: 10pt;
+      }
+
+      ul#areaofassignment {
+         font-size: 10pt;
+      }
+
+      @media only screen and (max-width: 667px) {
+        #table-responsive {
+          display: block;
+          width: 100%;
+          overflow-x: auto;
+        }
+        .table-responsive-custom {
+          display: block;
+          width: 100%;
+          overflow-x: auto;
+        }
+      }
+    .add_comp_label{
+      font-size: 14px!important;
+    }
+    .form-group.erattdropzone .error {
+        font-size: 15px;
+    }

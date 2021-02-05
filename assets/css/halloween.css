@@ -1,0 +1,20 @@
+ul#accordionSidebar.navbar-nav.sidebar.sidebar-dark.accordion {
+  background: rgba(211,108,20,0.9) !important;
+}
+/* nav.navbar.navbar-expand.navbar-light.bg-white.topbar.mb-4.static-top.shadow {
+  background: rgba(211,108,20,0.9) !important;
+} */
+div#dancing_bones_gif_div {
+  display: inline !important;
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  z-index: 99999 !important;
+  height: 190px !important;
+  width: 190px !important;
+  pointer-events: none;
+}
+
+div#dancing_bones_gif_div img {
+  height: 100%
+}

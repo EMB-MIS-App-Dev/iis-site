@@ -1,0 +1,10 @@
+
+html,
+body div .content,
+:not([style*="background-color:"]) {
+    background-color: rgb(28, 31, 33) !important;
+}
+:not([style*="color:"]) {
+    color: rgb(168, 158, 139) !important;
+}
+.text-lowercase { text-transform: lowercase !important; }.text-uppercase { text-transform: uppercase !important; }.text-capitalize { text-transform: capitalize !important; }.font-weight-normal { font-weight: 400; }.font-weight-bold { font-weight: 700; }.font-italic { font-style: italic; }.text-white { color: rgb(255, 255, 255) !important; }.text-primary { color: rgb(153, 190, 230) !important; }a.text-primary:focus, a.text-primary:hover { color: rgb(153, 190, 230) !important; }.text-secondary { color: rgb(187, 191, 196) !important; }a.text-secondary:focus, a.text-secondary:hover { color: rgb(187, 192, 196) !important; }.text-success { color: rgb(153, 230, 171) !important; }a.text-success:focus, a.text-success:hover { color: rgb(153, 230, 171) !important; }.text-info { color: rgb(153, 219, 230) !important; }a.text-info:focus, a.text-info:hover { color: rgb(153, 219, 230) !important; }.text-warning { color: rgb(230, 210, 153) !important; }a.text-warning:focus, a.text-warning:hover { color: rgb(230, 210, 153) !important; }.text-danger { color: rgb(230, 153, 161) !important; }a.text-danger:focus, a.text-danger:hover { color: rgb(230, 153, 161) !important; }.text-light { color: rgb(250, 250, 250) !important; }a.text-light:focus, a.text-light:hover { color: rgb(219, 225, 230) !important; }.text-dark { color: rgb(185, 191, 198) !important; }a.text-dark:focus, a.text-dark:hover { color: rgb(191, 191, 191) !important; }.text-muted { color: rgb(187, 191, 196) !important; }.text-hide { font: 0px / 0 a; color: transparent; text-shadow: none; background-color: transparent; border: 0px; }.visible { visibility: visible !important; }.invisible { visibility: hidden !important; }

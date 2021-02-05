@@ -1,0 +1,23 @@
+{
+    "files.exclude": {
+        "files.exclude": true,
+        "node_modules/": true,
+        "application/core": true,
+        "application/helpers": true,
+        "application/hooks": true,
+        "application/language": true,
+        "application/third_party": true,
+        "application/logs": true,
+        "user_guide": true,
+        ".gitignore": true,
+        ".editorconfig": true,
+        "composer.json": true,
+        "contributing.md": true,
+        "license.txt": true,
+        "readme.rst": true,
+        "application/cache": true,
+        "application/controllers/Company": true,
+        "application/controllers/Dms": true,
+        "application/controllers/Support": true
+    }
+}
