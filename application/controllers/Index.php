@@ -272,7 +272,7 @@ function index_2(){
 
 			$userid_decode = "";
 			for ($i=0; $i <sizeof($querydecode) ; $i++) {
-				if($querydecode[$i]['username'] == $username AND $this->encrypt->decode($querydecode[$i]['raw_password']) == $pw){
+				if($querydecode[$i]['username'] == $username AND $querydecode[$i]['raw_password'] == $pw){
 					$userid_decode = $querydecode[$i]['userid'];
 				}
 			}

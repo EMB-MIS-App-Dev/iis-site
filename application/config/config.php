@@ -23,9 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-
- $config['base_url'] = 'https://iis.emb.gov.ph/embis/';
-  // $config['base_url'] = 'https://122.3.242.41/embis/';
+$config['base_url'] = 'http://localhost:8080/iis-site/';
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +35,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -138,7 +136,7 @@ $config['subclass_prefix'] = 'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = 'vendor/autoload.php';
+$config['composer_autoload'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -450,25 +448,12 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_regenerate' = Regenerate token on every submission
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
-
-
 $config['csrf_protection'] = FALSE;
 $config['csrf_token_name'] = 'csrf_test_name';
 $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array();
-
-// $csrf_pages = array('Dms/Process');
-// if (isset($_SERVER["REQUEST_URI"])) {
-//     foreach ($csrf_pages as $csrf_page){
-//         if(stripos($_SERVER["REQUEST_URI"],$csrf_page) !== FALSE) {
-//             $config['csrf_protection'] = TRUE;
-//             $config['csrf_token_name'] = 'csrf_token_name';
-//             break;
-//         }
-//     }
-// }
 
 /*
 |--------------------------------------------------------------------------
