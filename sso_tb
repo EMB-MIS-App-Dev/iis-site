@@ -1,0 +1,9 @@
+CREATE TABLE sso_tb (
+    sso_id INTEGER(20) AUTO_INCREMENT NOT NULL,
+    iis_id VARCHAR(200),
+    nickname VARCHAR(200),
+    subsys_id VARCHAR(200),
+    mfa VARCHAR(200),
+    temp_deac INTEGER(20),
+    PRIMARY KEY (sso_id)
+);

@@ -120,3 +120,11 @@ $route['vehicle/tickets'] = 'Vehicle/Main';
 
 
 $route['downloadables'] = 'Downloadables/Dashboard/index';
+
+
+// SSO
+$route['test'] = "SSO/Ssocontroller/test";
+$route['ssoenrollment'] = "SSO/Ssocontroller/enrollment";
+$route['ssoenroll'] = "SSO/Ssocontroller/enroll";
+$route['ssoget'] = "SSO/Ssocontroller/getsubsys";
+$route['ssorem/(:num)'] = "SSO/Ssocontroller/remsubsys/$1";

@@ -45,6 +45,13 @@
       <i class="fas fa-fw fa-square"></i>
       <span>Dashboard</span></a>
   </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="<?php echo base_url(); ?>ssoenrollment">
+      <i class="fas fa-fw fa-edit"></i>
+      <span>SSO Systems</span></a>
+  </li>
+
     <hr class="sidebar-divider my-0">
     <!-- <li class="nav-item"> -->
       <!-- <a class="nav-link" target="_blank" href="<?php echo base_url(); ?>Support/Emb_support">
