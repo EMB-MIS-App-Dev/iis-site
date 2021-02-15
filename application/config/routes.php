@@ -128,3 +128,6 @@ $route['ssoenrollment'] = "SSO/Ssocontroller/enrollment";
 $route['ssoenroll'] = "SSO/Ssocontroller/enroll";
 $route['ssoget'] = "SSO/Ssocontroller/getsubsys";
 $route['ssorem/(:num)'] = "SSO/Ssocontroller/remsubsys/$1";
+
+// SSO login
+$route['selectsystem'] = "SSO/Ssocontroller/selectsys";

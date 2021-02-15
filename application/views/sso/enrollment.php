@@ -21,9 +21,9 @@
                   <td>
                     <select class='form-control' name="selSubsystem" id="selSubsystem">
                         <option value="" selected="true">Select</option>
-                        <option value="PCB|https://pcb.emb.gov.ph/" >PCB</option>
-                        <option value="HWMS|https://hwms.emb.gov.ph/login" >HWMS</option>
-                        <option value="IIS|https://iis.emb.gov.ph/embis/" >IIS</option>
+                        <option value="PCB|https://pcb.emb.gov.ph/home|<?php echo base_url().'assets/images/systems/pcb.png'?>" >PCB</option>
+                        <option value="HWMS|https://hwms.emb.gov.ph/home|<?php echo base_url().'assets/images/systems/hwms.png'?>" >HWMS</option>
+                        <option value="IIS|https://iis.emb.gov.ph/embis/dashboard|<?php echo base_url().'assets/images/systems/iis.png'?>" >IIS</option>
                     </select>
                   </td>
                   <td><input type="text" name="txtnickname" id="nickname" placeholder="Nickname" class="form-control"  /></td>
@@ -71,45 +71,45 @@
 
 <script>
 
-    $(document).ready(function(){
+  $(document).ready(function(){
 
-      //get data subsystems
-        function getList(){
-          $.ajax({
-              url: "<?php echo base_url(); ?>ssoget",
-              dataType: 'json',
-              type: 'get',
-              cache:false,
-              success: function(data){
-                  /*console.log(data);*/
-                  var event_data = '';
-                  $.each(data, function(index, value){
-                      /*console.log(value);*/
-                      event_data += '<tr>';
-                      event_data += '<td><a href="'+value.subsys_link+'" target="_blank">'+value.subsys_id+'</a></td>';
-                      event_data += '<td>'+value.nickname+'</td>';
-                      event_data += '<td>'+value.username+'</td>';
-                      event_data += '<td><i>(hidden)</i></td>';
-                      event_data += '<td>'+
-                                      '<a type="button" class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>ssorem/'+value.sso_id+'">'+
-                                          '<span class="icon text-white-50">'+
-                                              '<i class="fas fa-trash"></i>'+
-                                          '</span>'+
-                                      '</a>'+
-                                    '</td>';
-                      event_data += '<tr>';
-                  });
-                  $(".subsystem").empty();
-                  $(".subsystem").append(event_data);
-              },
-              error: function(d){
-                  /*console.log("error");*/
-                  alert("404. Please wait until the File is Loaded.");
-              }
-          });
-        }
+    //get data subsystems
+      function getList(){
+        $.ajax({
+            url: "<?php echo base_url(); ?>ssoget",
+            dataType: 'json',
+            type: 'get',
+            cache:false,
+            success: function(data){
+                /*console.log(data);*/
+                var event_data = '';
+                $.each(data, function(index, value){
+                    /*console.log(value);*/
+                    event_data += '<tr>';
+                    event_data += '<td><a href="'+value.subsys_link+'" target="_blank">'+value.subsys_id+'</a></td>';
+                    event_data += '<td>'+value.nickname+'</td>';
+                    event_data += '<td>'+value.username+'</td>';
+                    event_data += '<td><i>(hidden)</i></td>';
+                    event_data += '<td>'+
+                                    '<a type="button" class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>ssorem/'+value.sso_id+'">'+
+                                        '<span class="icon text-white-50">'+
+                                            '<i class="fas fa-trash"></i>'+
+                                        '</span>'+
+                                    '</a>'+
+                                  '</td>';
+                    event_data += '<tr>';
+                });
+                $(".subsystem").empty();
+                $(".subsystem").append(event_data);
+            },
+            error: function(d){
+                /*console.log("error");*/
+                alert("404. Please wait until the File is Loaded.");
+            }
+        });
+      }
 
-        getList();
-    });    
+      getList();
+  });    
 
 </script>

@@ -370,7 +370,10 @@ function index_2(){
 						);
 						$result['acc_logs'] = $this->Embismodel->insertdata('acc_logs', $insert['acc_logs']);
 
-						echo "<script>window.location.href='".base_url()."dashboard'</script>";
+	// ------------------------------------ ROUTE GOING TO DASHBOARD ------------------------------------
+						echo "<script>window.location.href='".base_url()."selectsystem'</script>";
+						// echo "<script>window.location.href='".base_url()."dashboard'</script>";
+	// ------------------------------------ ROUTE GOING TO DASHBOARD ------------------------------------
 					}
 				}else if($userid != '' AND $verified != '0' AND $reset == ''){
 					echo "<script>alert('Your account still needs approval. Please contact HR / MIS. Thank you.')</script>";

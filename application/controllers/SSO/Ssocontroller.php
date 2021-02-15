@@ -35,6 +35,7 @@ class Ssocontroller extends CI_Controller
         
         $subsys = $result_explode[0];
         $subsyslink = $result_explode[1];
+        $subsysimg = $result_explode[2];
 
         $nickname = $this->input->post('txtnickname');
         $uname = $this->input->post('txtusernames');
@@ -52,6 +53,7 @@ class Ssocontroller extends CI_Controller
                     'iis_id' =>  $iisid,
                     'subsys_id' => $subsys,
                     'subsys_link' => $subsyslink,
+                    'subsys_img' => $subsysimg,
                     'nickname' => $nickname,
                     'username' => $uname,
                     'password' => $password
@@ -59,6 +61,29 @@ class Ssocontroller extends CI_Controller
                $res = $this->Ssomodel->enroll($data);
 
                $this->session->set_flashdata('flashmsg', 'Account successfully added!');
+            }else{
+
+                $this->session->set_flashdata('flashmsg', $var->message);
+            }
+        }else if($subsys == 'HWMS'){
+            // get api
+            $data =  file_get_contents("https://hwms.emb.gov.ph/api/user/$uname/$password");
+            $var = json_decode($data);
+
+            $iisid = $this->session->userdata('userid');
+
+            if($var->status == 1 && $var->message == 'Valid'){
+                $data = array(
+                    'iis_id' =>  $iisid,
+                    'subsys_id' => $subsys,
+                    'subsys_link' => $subsyslink,
+                    'nickname' => $nickname,
+                    'username' => $uname,
+                    'password' => $password
+                );
+                $res = $this->Ssomodel->enroll($data);
+
+                $this->session->set_flashdata('flashmsg', 'Account successfully added!');
             }else{
 
                 $this->session->set_flashdata('flashmsg', $var->message);
@@ -84,6 +109,16 @@ class Ssocontroller extends CI_Controller
         
         $url = $_SERVER['HTTP_REFERER'];
 		redirect($url);
+    }
+
+    function selectsys(){
+        $data['getsub'] =  $this->Ssomodel->fetch_subsys();
+        $this->load->library('session');
+        $this->load->view('includes/login/header');
+        $this->load->view('sso/selectsys', $data);
+        $this->load->view('includes/login/footer');
+        
+        // echo "<script>window.location.href='".base_url()."dashboard'</script>";
     }
 }
 
