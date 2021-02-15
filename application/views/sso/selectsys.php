@@ -49,11 +49,18 @@
             <?php foreach ($getsub as $gs): ?>
                 <?php if ($gs['iis_id'] == $this->session->userdata('userid')): ?>
                     <div class="w3-card-4" style="width:50%; padding: 10px;">
-                        <a href="<?php echo($gs['subsys_link']); ?>">
+
+                    <?php
+                    if($gs['subsys_id'] == "PCB"){
+                        $link = 'http://'.$gs['subsys_link'] . "?username=" . $gs['username'] . "&password=" . $gs['password'] ;
+                      
+                    }
+                    ?>
+                        <a href="<?php echo($link); ?>">
                             <img src="<?php echo($gs['subsys_img']); ?>" alt="User" style="width:100%">
                             <div class="w3-container w3-center">
                             <p style="text-align: center"><b><?php echo($gs['subsys_id']); ?></b></p>
-                            <p style="text-align: center"><b><?php echo($gs['nickname']); ?></b></p>
+                            <p style="text-align: center"><b><?php echo($gs['subsys_link']); ?></b></p>
                             
                             </div>
                         </a>

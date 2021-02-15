@@ -21,7 +21,7 @@
                   <td>
                     <select class='form-control' name="selSubsystem" id="selSubsystem">
                         <option value="" selected="true">Select</option>
-                        <option value="PCB|https://pcb.emb.gov.ph/home|<?php echo base_url().'assets/images/systems/pcb.png'?>" >PCB</option>
+                        <option value="PCB|pcb.emb.gov.ph/|<?php echo base_url().'assets/images/systems/pcb.png'?>" >PCB</option>
                         <option value="HWMS|https://hwms.emb.gov.ph/home|<?php echo base_url().'assets/images/systems/hwms.png'?>" >HWMS</option>
                         <option value="IIS|https://iis.emb.gov.ph/embis/dashboard|<?php echo base_url().'assets/images/systems/iis.png'?>" >IIS</option>
                     </select>
