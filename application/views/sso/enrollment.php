@@ -26,9 +26,9 @@
                         <option value="IIS|https://iis.emb.gov.ph/embis/dashboard|<?php echo base_url().'assets/images/systems/iis.png'?>" >IIS</option>
                     </select>
                   </td>
-                  <td><input type="text" name="txtnickname" id="nickname" placeholder="Nickname" class="form-control"  /></td>
-                  <td><input type="text" name="txtusernames" id="username" class="form-control" placeholder="Username" id="username"/></td>
-                  <td><input type="password" name="txtpasswords" id="password" class="form-control" placeholder="Password" id="password"/></td>
+                  <td><input type="text" name="txtnickname" id="nickname" placeholder="Nickname" class="form-control"  required/></td>
+                  <td><input type="text" name="txtusernames" id="username" class="form-control" placeholder="Username" id="username" required/></td>
+                  <td><input type="password" name="txtpasswords" id="password" class="form-control" placeholder="Password" id="password" required/></td>
                   <td><button type="submit" class="btn btn-primary btn-sm">
                       <span class="icon text-white-50">
                           <i class="fas fa-plus"></i>

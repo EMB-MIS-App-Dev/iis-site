@@ -67,16 +67,45 @@ class Ssocontroller extends CI_Controller
             }
         }else if($subsys == 'HWMS'){
             // get api
-            $data =  file_get_contents("https://hwms.emb.gov.ph/api/user/$uname/$password");
-            $var = json_decode($data);
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, "https://hwms.emb.gov.ph/api/user/$uname/$password/");
+            //curl_setopt($ch, CURLOPT_URL, 'https://hwms.emb.gov.ph/api/user/support@emb.gov.ph/@l03e1t3/');
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
+            curl_setopt($ch, CURLOPT_HEADER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 45);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Accept: application/json',
+                'Content-Type: application/json',
+                sprintf('Authorization: Bearer %s', 'sh4PgSyLRvBUax1wznv6tpICeC101Dj24btQuWRGj5ck6RDpaP3WypLpiSlL')
+             ));
+           
+           
+                $response = curl_exec($ch);  
+               
+            curl_close($ch);
+  
+            $res = json_decode($response, true);
+            $status = ($res[0]['status']);
+            $message = ($res[0]['message']);
+
+            // echo $response;
+            // echo $status;
+            // echo $message;
 
             $iisid = $this->session->userdata('userid');
 
-            if($var->status == 1 && $var->message == 'Valid'){
+            if($status == 1 && $message == 'Valid'){
                 $data = array(
                     'iis_id' =>  $iisid,
                     'subsys_id' => $subsys,
                     'subsys_link' => $subsyslink,
+                    'subsys_img' => $subsysimg,
                     'nickname' => $nickname,
                     'username' => $uname,
                     'password' => $password
@@ -86,13 +115,11 @@ class Ssocontroller extends CI_Controller
                 $this->session->set_flashdata('flashmsg', 'Account successfully added!');
             }else{
 
-                $this->session->set_flashdata('flashmsg', $var->message);
+                $this->session->set_flashdata('flashmsg', $message);
             }
         }else{
             $this->session->set_flashdata('flashmsg', 'System Unavailable!');
         }
-
-        // $this->session->set_flashdata('flashmsg', $subsys);
 
         $url = $_SERVER['HTTP_REFERER'];
         redirect($url);
