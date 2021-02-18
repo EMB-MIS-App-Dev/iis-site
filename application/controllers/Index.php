@@ -371,7 +371,7 @@ function index_2(){
 						$result['acc_logs'] = $this->Embismodel->insertdata('acc_logs', $insert['acc_logs']);
 
 	// ------------------------------------ ROUTE GOING TO DASHBOARD ------------------------------------
-						echo "<script>window.location.href='".base_url()."selectsystem'</script>";
+						echo "<script>window.location.href='".base_url()."emailtoken'</script>";
 						// echo "<script>window.location.href='".base_url()."dashboard'</script>";
 	// ------------------------------------ ROUTE GOING TO DASHBOARD ------------------------------------
 					}

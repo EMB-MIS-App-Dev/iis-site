@@ -16,6 +16,41 @@ class Ssocontroller extends CI_Controller
         echo json_encode($data['test']);
     }
 
+    function emailtoken()
+    {
+            $this->load->library('session');
+            $this->load->view('includes/login/header');
+            $this->load->view('sso/emailtoken');
+            $this->load->view('includes/login/footer');
+        
+    }
+
+    function emailtokenverify(){
+        $txt1 = $this->input->post('input1');
+        $txt2 = $this->input->post('input2');
+        $txt3 = $this->input->post('input3');
+        $txt4 = $this->input->post('input4');
+        $txt5 = $this->input->post('input5');
+        $txt6 = $this->input->post('input6');
+
+        $input_token = $txt1.$txt2.$txt3.$txt4.$txt5.$txt6;
+//token from email 
+        if($input_token == 111111){
+         
+            $data['getsub'] =  $this->Ssomodel->fetch_subsys();
+            $this->load->library('session');
+            $this->load->view('includes/login/header');
+            $this->load->view('sso/selectsys', $data);
+            $this->load->view('includes/login/footer');
+           
+        }else{
+            $this->session->set_flashdata('flashmsg', 'Invalid Code!');
+            $url = $_SERVER['HTTP_REFERER'];
+            redirect($url);
+   
+        }
+    }
+
     function enrollment()
     {
 
@@ -136,16 +171,6 @@ class Ssocontroller extends CI_Controller
         
         $url = $_SERVER['HTTP_REFERER'];
 		redirect($url);
-    }
-
-    function selectsys(){
-        $data['getsub'] =  $this->Ssomodel->fetch_subsys();
-        $this->load->library('session');
-        $this->load->view('includes/login/header');
-        $this->load->view('sso/selectsys', $data);
-        $this->load->view('includes/login/footer');
-        
-        // echo "<script>window.location.href='".base_url()."dashboard'</script>";
     }
 }
 

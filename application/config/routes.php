@@ -130,4 +130,7 @@ $route['ssoget'] = "SSO/Ssocontroller/getsubsys";
 $route['ssorem/(:num)'] = "SSO/Ssocontroller/remsubsys/$1";
 
 // SSO login
-$route['selectsystem'] = "SSO/Ssocontroller/selectsys";
+
+$route['logout'] = "Index/logout_user";
+$route['emailtoken'] = "SSO/Ssocontroller/emailtoken";
+$route['emailtokenverify'] = "SSO/Ssocontroller/emailtokenverify";
