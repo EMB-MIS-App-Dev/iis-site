@@ -30,6 +30,8 @@
         <span class="login100-form-title p-b-40">
           <span style="color:green;">ENVIRONMENTAL MANAGEMENT BUREAU</span>
         </span>
+
+        <!-- ---------------------------- select sub system ---------------------------- -->
         <span class="login100-form-title p-b-40" >
           <span style="color:green; text-align: center; font-size: 20px;">SELECT SUB-SYSTEM</span>
         </span>
@@ -60,7 +62,7 @@
                             <img src="<?php echo($gs['subsys_img']); ?>" alt="User" style="width:100%">
                             <div class="w3-container w3-center">
                             <p style="text-align: center"><b><?php echo($gs['subsys_id']); ?></b></p>
-                            <p style="text-align: center"><b><?php echo($gs['subsys_link']); ?></b></p>
+                            <p style="text-align: center"><b><?php echo($gs['nickname']); ?></b></p>
                             
                             </div>
                         </a>
@@ -68,10 +70,18 @@
                 <?php endif; ?>
             <?php endforeach; ?>
 
+            <span class="login100-form-title p-b-40" >
+              <span style="color:green; text-align: center; font-size: 20px;">
+                <a type="button" class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>Index/logout_user">
+                  Back         
+                </a>
+              </span>
+            </span>
+            
+                    
         </div>
-
-       
     </div>
+    <!-- ---------------------------- end select sub system ---------------------------- -->
     </form>
   </div>
 </div>
