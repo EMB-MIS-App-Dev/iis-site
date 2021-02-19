@@ -53,24 +53,18 @@
 
             <div>
                 <div class="row SMSArea">
-                    <div class="col-2">
-                        <input type="text" name="input1" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" />
-                    </div>
-                    <div class="col-2">
-                        <input type="text" name="input2" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" />
-                    </div>
-                    <div class="col-2">
-                        <input type="text" name="input3" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" />
-                    </div>
-                    <div class="col-2">
-                        <input type="text" name="input4" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" />
-                    </div>
-                    <div class="col-2">
-                        <input type="text" name="input5" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" />
-                    </div>
-                    <div class="col-2">
-                        <input type="text" name="input6" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" />
-                    </div>
+                    
+                        <input style="width: 50px; margin: 6px" type="text" name="input1" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" />
+                    
+                        <input style="width: 50px; margin: 6px" type="text" name="input2" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" />
+                    
+                        <input style="width: 50px; margin: 6px" type="text" name="input3" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" />
+                    
+                        <input style="width: 50px; margin: 6px" type="text" name="input4" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" />
+                    
+                        <input style="width: 50px; margin: 6px" type="text" name="input5" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" />
+                    
+                        <input style="width: 50px; margin: 6px" type="text" name="input6" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" />
                 </div>
             </div>
 
@@ -96,3 +90,13 @@
         </form>
   </div>
 </div>
+
+<script type="text/javascript">
+    $(".inputs").keyup(function () {
+    if (this.value.length == this.maxLength) {
+            $(this).next('.inputs').focus();
+            $(this).next('.inputs').select();
+            }
+    });
+    
+</script>

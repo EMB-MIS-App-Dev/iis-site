@@ -22,5 +22,6 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/util.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/main.css">
 <!--===============================================================================================-->
+<script src="<?php echo base_url(); ?>assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 </head>
 <body>
