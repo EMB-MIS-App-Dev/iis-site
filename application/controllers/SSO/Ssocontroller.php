@@ -8,21 +8,89 @@ class Ssocontroller extends CI_Controller
     {
       parent::__construct();
       $this->load->model('Ssomodel');
+      $this->load->model('Embismodel');
       $this->load->database();
     }
 
     function test(){
-        $data['test'] =  $this->Ssomodel->fetch_subsys();
-        echo json_encode($data['test']);
+        // $data['test'] =  $this->Ssomodel->fetch_subsys();
+        // echo json_encode($data['test']);
+
     }
 
-    function emailtoken()
+    function emailtoken($email)
     {
+            $this->sendtoken($email);
+
             $this->load->library('session');
             $this->load->view('includes/login/header');
             $this->load->view('sso/emailtoken');
             $this->load->view('includes/login/footer');
         
+    }
+
+    function sendtoken($email){
+        // echo $email;
+
+        // get email address
+        $where = array('sec.userid' => $email );
+		$queryselect = $this->Embismodel->selectdata('acc_credentials AS sec','sec.email',$where);
+
+        $response = json_encode($queryselect);
+
+        $res = json_decode($response, true);
+            $resemail = ($res[0]['email']);
+
+        //  echo $resemail;
+
+
+        // get otp token
+        $str_result = '0123456789'; 
+		$randtoken = substr(str_shuffle($str_result), 0, 6); 
+
+        $data = array(
+            'otp' => $randtoken
+        );
+
+        $this->db->where('iis_id', $email);
+        $this->db->update('sso_tb', $data);
+
+
+        // ------------------- SEND EMAIL ----------------------
+        $this->load->library('email');
+
+        $this->load->config('email');
+        $this->load->library('email');
+        $this->email->set_crlf( "\r\n" );
+        $from = $this->config->item('smtp_user');
+        $to 	 = $resemail;
+
+        $subject = 'IIS - One Time Password (OTP) Confirmation';
+        $message  = "***THIS IS AUTOMATICALLY GENERATED EMAIL, PLEASE DO NOT REPLY***<br><br>";
+        $message .= "SINGLE SIGN ON (SSO) Confirmation.<br><br>";
+        $message .= "<h1>Your One Time Password is: ".$randtoken."</h1><br><br>";
+        $message .= "If you have any concerns and issues, please don't hesitate to contuct us <u><i>support@emb.gov.ph</i></u>.<br><br>";
+        $message .= "Thank you!";
+       
+
+        $this->email->set_newline("\r\n");
+        $this->email->set_mailtype('html');
+        // $this->email->from($from);
+        $this->email->from('r7support@emb.gov.ph', 'EMB - IIS');
+        $this->email->to($to);
+        $this->email->subject($subject);
+        $this->email->message($message);
+
+
+
+        if ($this->email->send()) {
+            $msg['msg']='sent to '.$resemail;
+        }else {
+            $msg['msg'] = $this->email->print_debugger();
+        }
+       
+        // echo json_encode($msg);
+       
     }
 
     function emailtokenverify(){
@@ -35,7 +103,12 @@ class Ssocontroller extends CI_Controller
 
         $input_token = $txt1.$txt2.$txt3.$txt4.$txt5.$txt6;
 //token from email 
-        if($input_token == 111111){
+
+        
+        $query  = $this->db->get_where('sso_tb', array('iis_id' => 1));
+        $row = $query->row();
+
+        if($input_token ==  $row->otp){
          
             $data['getsub'] =  $this->Ssomodel->fetch_subsys();
             $this->load->library('session');
