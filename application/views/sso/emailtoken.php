@@ -89,7 +89,7 @@
             <span class="login100-form-title p-b-40" >
                 <span style="color:green; text-align: center; font-size: 20px;">
                 <?php $userid=$this->session->userdata('userid'); ?>
-                    <a href="<?php echo base_url('emailtoken/').$userid; ?>">
+                    <a href="<?php echo base_url('sendtoken/').$userid; ?>">
                         Resend code         
                     </a>
                 </span>

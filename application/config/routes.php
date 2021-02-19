@@ -134,3 +134,4 @@ $route['ssorem/(:num)'] = "SSO/Ssocontroller/remsubsys/$1";
 $route['logout'] = "Index/logout_user";
 $route['emailtoken'] = "SSO/Ssocontroller/emailtoken";
 $route['emailtokenverify'] = "SSO/Ssocontroller/emailtokenverify";
+$route['sendtoken/(:any)'] = "SSO/Ssocontroller/sendtoken/$1";

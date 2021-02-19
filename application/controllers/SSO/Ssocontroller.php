@@ -88,6 +88,8 @@ class Ssocontroller extends CI_Controller
        
         // echo json_encode($msg);
        
+        $url = $_SERVER['HTTP_REFERER'];
+        redirect($url);
     }
 
     function emailtokenverify(){
