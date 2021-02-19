@@ -49,7 +49,7 @@
   <li class="nav-item">
     <a class="nav-link" href="<?php echo base_url(); ?>ssoenrollment">
       <i class="fas fa-fw fa-edit"></i>
-      <span>SSO Systems</span></a>
+      <span>Online Systems</span></a>
   </li>
 
     <hr class="sidebar-divider my-0">

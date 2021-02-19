@@ -18,15 +18,12 @@ class Ssocontroller extends CI_Controller
 
     }
 
-    function emailtoken($email)
+    function emailtoken()
     {
-            $this->sendtoken($email);
-
             $this->load->library('session');
             $this->load->view('includes/login/header');
             $this->load->view('sso/emailtoken');
             $this->load->view('includes/login/footer');
-        
     }
 
     function sendtoken($email){
