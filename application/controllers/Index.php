@@ -407,7 +407,7 @@ function index_2(){
 			{
 					redirect('Index');
 			}
-
+			$_SESSION["loginsystem"] = 1;
 			$this->load->library('session');
 			$this->Embismodel->selectdatarights();
 			$this->load->view('includes/common/header');
