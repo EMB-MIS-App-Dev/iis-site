@@ -10,6 +10,7 @@ class Ssocontroller extends CI_Controller
       $this->load->model('Ssomodel');
       $this->load->model('Embismodel');
       $this->load->database();
+      $_SESSION["loginsystem"] = 0;
     }
 
     function test(){
@@ -109,6 +110,9 @@ class Ssocontroller extends CI_Controller
 
         if($input_token ==  $row->otp){
          
+            // session for verification if logged in for IIS
+            $_SESSION["loginsystem"] = 1;
+
             $data['getsub'] =  $this->Ssomodel->fetch_subsys();
             $this->load->library('session');
             $this->load->view('includes/login/header');

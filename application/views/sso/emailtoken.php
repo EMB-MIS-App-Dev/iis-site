@@ -54,17 +54,17 @@
             <div>
                 <div class="row SMSArea">
                     
-                        <input style="width: 50px; margin: 6px" type="text" name="input1" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" />
+                        <input style="width: 50px; margin: 6px" type="text" name="input1" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" autocomplete="off" />
                     
-                        <input style="width: 50px; margin: 6px" type="text" name="input2" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" />
+                        <input style="width: 50px; margin: 6px" type="text" name="input2" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" autocomplete="off" />
                     
-                        <input style="width: 50px; margin: 6px" type="text" name="input3" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" />
+                        <input style="width: 50px; margin: 6px" type="text" name="input3" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" autocomplete="off" />
                     
-                        <input style="width: 50px; margin: 6px" type="text" name="input4" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" />
+                        <input style="width: 50px; margin: 6px" type="text" name="input4" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" autocomplete="off" />
                     
-                        <input style="width: 50px; margin: 6px" type="text" name="input5" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" />
+                        <input style="width: 50px; margin: 6px" type="text" name="input5" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" autocomplete="off" />
                     
-                        <input style="width: 50px; margin: 6px" type="text" name="input6" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" />
+                        <input style="width: 50px; margin: 6px" type="text" name="input6" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" autocomplete="off" />
                 </div>
             </div>
 
@@ -86,14 +86,26 @@
                     </button>
                 </span>
             </span>
-            <span class="login100-form-title p-b-40" >
+            <!-- <span class="login100-form-title p-b-40" >
                 <span style="color:green; text-align: center; font-size: 20px;">
                 <?php $userid=$this->session->userdata('userid'); ?>
                     <a href="<?php echo base_url('sendtoken/').$userid; ?>">
                         Resend code         
                     </a>
                 </span>
+            </span> -->
+            <span class="login100-form-title p-b-40" >
+                <span style="color:green; text-align: center; font-size: 20px;">
+                <?php $userid=$this->session->userdata('userid'); ?>
+                    <p>
+                        An email with a confirmation code will be sent to your email address. Please click 'send' button below and enter the confirmation code above.
+                    </p>
+                    <a type="button" class="btn btn-primary btn-sm" href="<?php echo base_url('sendtoken/').$userid; ?>">   
+                    Send
+                    </a>
+                </span>
             </span>
+
         
         </form>
   </div>

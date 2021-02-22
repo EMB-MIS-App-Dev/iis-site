@@ -399,6 +399,10 @@ function index_2(){
 
 
 		function dashboard(){
+			if($_SESSION["loginsystem"] == 0){
+				$this->logout_user();
+			};
+
 			if ( !$this->session->userdata('logged_in'))
 			{
 					redirect('Index');
