@@ -98,10 +98,14 @@
                 <span style="color:green; text-align: center; font-size: 20px;">
                 <?php $userid=$this->session->userdata('userid'); ?>
                     <p>
-                        An email with a confirmation code will be sent to your email address. Please click 'send' button below and enter the confirmation code above.
+                        An email with a confirmation code will be sent to your email address/mobile number. Please click button below and enter the confirmation code above.
                     </p>
                     <a type="button" class="btn btn-primary btn-sm" href="<?php echo base_url('sendtoken/').$userid; ?>">   
-                    Send
+                    Send via Email
+                    </a>
+
+                    <a type="button" class="btn btn-primary btn-sm" href="<?php echo base_url('sendtokensms/').$userid; ?>">   
+                    Send via SMS
                     </a>
                 </span>
             </span>

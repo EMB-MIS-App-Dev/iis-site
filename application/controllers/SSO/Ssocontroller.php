@@ -21,10 +21,43 @@ class Ssocontroller extends CI_Controller
 
     function emailtoken()
     {
-            $this->load->library('session');
-            $this->load->view('includes/login/header');
-            $this->load->view('sso/emailtoken');
-            $this->load->view('includes/login/footer');
+        $this->load->library('session');
+        $this->load->view('includes/login/header');
+        $this->load->view('sso/emailtoken');
+        $this->load->view('includes/login/footer');
+    }
+
+    function removetoken($email){
+        $data = array(
+            'otp' => ''
+        );
+
+        $this->db->where('iis_id', $email);
+        $this->db->update('sso_tb', $data);
+    
+    }
+
+    function sendtokensms($email){
+        // get otp token
+        $str_result = '0123456789'; 
+		$randtoken = substr(str_shuffle($str_result), 0, 6); 
+
+        $data = array(
+            'otp' => $randtoken
+        );
+
+        $this->db->where('iis_id', $email);
+        $this->db->update('sso_tb', $data);
+
+        // SMS DETAILS
+        $number = '639760129599';
+        $msg = "***THIS+IS+AUTOMATICALLY+GENERATED+SMS,+PLEASE+DO+NOT+REPLY***%0A%0AYour+One+Time+Password+is:+".$randtoken."";
+
+        $api = file_get_contents("https://sms.mybusybee.net/app/smsapi/index.php?key=5d8326d9b8de4&type=text&title=updateprofile&contacts=".$number."&senderid=DENR-EMB&msg=".$msg."");
+        
+        // echo $api;
+        $url = $_SERVER['HTTP_REFERER'];
+        redirect($url);
     }
 
     function sendtoken($email){
@@ -109,7 +142,8 @@ class Ssocontroller extends CI_Controller
         $row = $query->row();
 
         if($input_token ==  $row->otp){
-         
+            $this->removetoken($this->session->userdata('userid'));
+            
             // session for verification if logged in for IIS
             $_SESSION["loginsystem"] = 1;
 
