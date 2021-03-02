@@ -19,6 +19,28 @@ class Ssocontroller extends CI_Controller
 
     }
 
+    function updatedetails()
+    {
+        $iisid = $this->session->userdata('userid');
+        $where = array('sec.userid' => $iisid);
+        $queryselect = $this->Embismodel->selectdata('acc_credentials AS sec','sec.is_updated',$where);
+        $response = json_encode($queryselect);
+
+        $res = json_decode($response, true);
+        $is_updated = ($res[0]['is_updated']);
+
+        if($is_updated == "0"){
+            $this->load->library('session');
+            $this->load->view('includes/login/header');
+            $this->load->view('sso/update');
+            $this->load->view('includes/login/footer');
+        }else{
+            $this->emailtoken();
+        }
+        
+    }
+
+
     function emailtoken()
     {
         $this->load->library('session');
@@ -50,16 +72,16 @@ class Ssocontroller extends CI_Controller
         $this->db->update('sso_tb', $data);
 
         // get mobile number
-        // $where = array('sec.userid' => $email );
-		// $queryselect = $this->Embismodel->selectdata('acc_credentials AS sec','sec.cell_no',$where);
+        $where = array('sec.userid' => $email );
+		$queryselect = $this->Embismodel->selectdata('acc_credentials AS sec','sec.cell_no',$where);
 
-        // $response = json_encode($queryselect);
+        $response = json_encode($queryselect);
 
-        // $res = json_decode($response, true);
-        // $number = ($res[0]['cell_no']);
+        $res = json_decode($response, true);
+        $number = ($res[0]['cell_no']);
 
         // SMS DETAILS
-        $number = '639760129599';
+        // $number = '639760129599';
         $msg = "***THIS+IS+AUTOMATICALLY+GENERATED+SMS,+PLEASE+DO+NOT+REPLY***%0A%0AYour+One+Time+Password+is:+".$randtoken."";
 
         $api = file_get_contents("https://sms.mybusybee.net/app/smsapi/index.php?key=5d8326d9b8de4&type=text&title=updateprofile&contacts=".$number."&senderid=DENR-EMB&msg=".$msg."");
@@ -291,6 +313,21 @@ class Ssocontroller extends CI_Controller
         
         $url = $_SERVER['HTTP_REFERER'];
 		redirect($url);
+    }
+
+    function update_accountinfo(){
+        // print_r($this->input->post());
+        $iisid = $this->session->userdata('userid');
+        $update_email = $this->Embismodel->updatedata(array('email' => $this->input->post('email'), 'cell_no' => $this->input->post('cell_no'), 'is_updated' => 1), 'acc_credentials', array('userid' =>  $iisid) );
+        // echo $update_email; 
+        if($update_email){
+            $this->emailtoken();
+        }else{
+            $this->session->set_flashdata('flashmsg', 'No Connection!');
+            $url = $_SERVER['HTTP_REFERER'];
+		    redirect($url);
+        }
+
     }
 }
 

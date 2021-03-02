@@ -130,9 +130,11 @@ $route['ssoget'] = "SSO/Ssocontroller/getsubsys";
 $route['ssorem/(:num)'] = "SSO/Ssocontroller/remsubsys/$1";
 
 // SSO login
-
+$route['update'] = "SSO/Ssocontroller/updatedetails";
+$route['update_accountinfo'] = "SSO/Ssocontroller/update_accountinfo";
 $route['logout'] = "Index/logout_user";
 $route['emailtoken'] = "SSO/Ssocontroller/emailtoken";
 $route['emailtokenverify'] = "SSO/Ssocontroller/emailtokenverify";
 $route['sendtoken/(:any)'] = "SSO/Ssocontroller/sendtoken/$1";
 $route['sendtokensms/(:any)'] = "SSO/Ssocontroller/sendtokensms/$1";
+

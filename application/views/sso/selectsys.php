@@ -33,7 +33,7 @@
 
         <!-- ---------------------------- select sub system ---------------------------- -->
         <span class="login100-form-title p-b-40" >
-          <span style="color:green; text-align: center; font-size: 20px;">SELECT SUB-SYSTEM</span>
+          <span style="color:green; text-align: center; font-size: 20px;">SELECT FROM THE FOLLOWING SYSTEMS</span>
         </span>
 
 

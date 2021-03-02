@@ -18,5 +18,6 @@ class Ssomodel extends CI_Model{
         $this->db->where('sso_id', $id);
         $this->db->delete('sso_tb');
     }
+
 }
 ?>

@@ -55,7 +55,25 @@
 
             <!-- ---------------------------- select sub system ---------------------------- -->
             <span class="login100-form-title p-b-40" >
-            <span style="color:green; text-align: center; font-size: 20px;">Please enter your OTP</span>
+
+            <span class="login100-form-title p-b-40" >
+                <span style="color:green; text-align: center; font-size: 20px;">
+                <?php $userid=$this->session->userdata('userid'); ?>
+                    <p>
+                        Part of improving the system security, we are implementing the two-factor authentication. Click from the button below to recieve the confirmation code.
+                    </p>
+                    <a type="button" class="btn btn-primary btn-sm" href="<?php echo base_url('sendtoken/').$userid; ?>">   
+                    Send via Email
+                    </a>
+
+                    <a type="button" class="btn btn-primary btn-sm" href="<?php echo base_url('sendtokensms/').$userid; ?>">   
+                    Send via SMS
+                    </a>
+                </span>
+            </span>
+
+            <!-- <span style="color:green; text-align: center; font-size: 20px;">Please enter your Confirmation Code</span> -->
+            <p>Please enter your Confirmation Code and click the Continue button.</p>
             </span>
 
             <div>
@@ -82,14 +100,14 @@
             <?php endif; ?>
 
             <span class="login100-form-title p-b-40" >
-                <span style="color:green; text-align: center; font-size: 20px;">
+                <!-- <span style="color:green; text-align: center; font-size: 20px;">
                     <a type="button" class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>Index/logout_user">
                         Back         
                     </a>
-                </span>
+                </span> -->
                 <span style="color:green; text-align: center; font-size: 20px;">
-                    <button type="submit" class="btn btn-primary btn-sm">
-                      <span class="text">Verify</span>
+                    <button type="submit" class="btn btn-primary btn-md">
+                      <span class="text">Continue</span>
                     </button>
                 </span>
             </span>
@@ -101,21 +119,7 @@
                     </a>
                 </span>
             </span> -->
-            <span class="login100-form-title p-b-40" >
-                <span style="color:green; text-align: center; font-size: 20px;">
-                <?php $userid=$this->session->userdata('userid'); ?>
-                    <p>
-                        An email with a confirmation code will be sent to your email address/mobile number. Please click button below and enter the confirmation code above.
-                    </p>
-                    <a type="button" class="btn btn-primary btn-sm" href="<?php echo base_url('sendtoken/').$userid; ?>">   
-                    Send via Email
-                    </a>
-
-                    <a type="button" class="btn btn-primary btn-sm" href="<?php echo base_url('sendtokensms/').$userid; ?>">   
-                    Send via SMS
-                    </a>
-                </span>
-            </span>
+            x
 
         
         </form>
@@ -148,7 +152,7 @@
                     <label> 1.) Update your email and mobile number registered on IIS.</label>
                 </div>
                 <div class="col-md-12" id="bulletincnt_">
-                    <img src="<?php echo base_url().'assets/images/tutorial/insert.png'?>" alt="User" style="width:100%">
+                    <img src="<?php echo base_url().'assets/images/tutorial/update.png'?>" alt="User" style="width:100%">
                 </div>
             </div>
 		</div>
@@ -230,7 +234,7 @@
 
     // modal for instructions
     $(window).on('load', function() {
-        $('#myModal').modal('show');
+        // $('#myModal').modal('show');
     });
 
     $(document).ready(function() {
