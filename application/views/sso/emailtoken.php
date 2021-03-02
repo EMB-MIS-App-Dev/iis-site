@@ -25,6 +25,13 @@
         outline: none;
         border-radius: 3px;
     }
+
+    .alert.alert-info, .button
+    { 
+    max-width: 600px; 
+    margin: 40px auto;
+    text-align: center;
+    }
     
 </style>
 
@@ -115,6 +122,103 @@
   </div>
 </div>
 
+<!-- modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Single Sign-on (SSO)</h4>
+      
+      </div>
+      
+      <div class="modal-body">
+	  <div class="modal-split">
+            <div class="row">
+                <div class="col-md-12" id="bulletincnt_">
+                    <label><b>Single sign-on (SSO) is an authentication scheme that allows a user to log in with a single ID and password to any of several related, yet independent, software systems.</b></label>
+                </div>
+            </div>
+		</div>
+
+        <div class="modal-split">
+            <div class="row">
+                <div class="col-md-12" id="bulletincnt_">
+                    <label> 1.) Update your email and mobile number registered on IIS.</label>
+                </div>
+                <div class="col-md-12" id="bulletincnt_">
+                    <img src="<?php echo base_url().'assets/images/tutorial/insert.png'?>" alt="User" style="width:100%">
+                </div>
+            </div>
+		</div>
+		
+		<div class="modal-split">
+        <div class="row">
+                <div class="col-md-12" id="bulletincnt_">
+                    <label> 2.) On the IIS sidebar, click Online Systems.</label>
+                </div>
+                <div class="col-md-12" id="bulletincnt_">
+                    <img src="<?php echo base_url().'assets/images/tutorial/sidebar.png'?>" alt="User" style="width:100%">
+                </div>
+            </div>
+		</div>
+		
+		<div class="modal-split">
+        <div class="row">
+                <div class="col-md-12" id="bulletincnt_">
+                    <label> 3.) Enroll your sub-system you want to link to your IIS account.</label><br>
+                    <label> a. Select the sub-system you want to add.</label><br>
+                    <label> b. Add a nickname to your user account.</label><br>
+                    <label> c. Type your sub-system username and password.</label><br>
+                    <label> d. Click "Add sub-system" button, then wait for the user validation of the account.</label>
+                </div>
+                <div class="col-md-12" id="bulletincnt_">
+                    <img src="<?php echo base_url().'assets/images/tutorial/enrollment1.png'?>" alt="User" style="width:100%">
+                </div>
+            </div>
+		</div>	
+        <div class="modal-split">
+            <div class="row">
+                <div class="col-md-12" id="bulletincnt_">
+                    <label> 4.) Once validated, your account will be added to the list below.</label>
+                </div>
+                <div class="col-md-12" id="bulletincnt_">
+                    <img src="<?php echo base_url().'assets/images/tutorial/enrollment2.png'?>" alt="User" style="width:100%">
+                </div>
+            </div>
+		</div>	
+        <div class="modal-split">
+            <div class="row">
+                <div class="col-md-12" id="bulletincnt_">
+                    <label> 5.) Re-login to your account, then you will be redirected to the OTP page.</label>
+                </div>
+                <div class="col-md-12" id="bulletincnt_">
+                    <img src="<?php echo base_url().'assets/images/tutorial/otp.png'?>" alt="User" style="width:100%">
+                </div>
+            </div>
+		</div>	
+        <div class="modal-split">
+            <div class="row">
+                <div class="col-md-12" id="bulletincnt_">
+                    <label> 6.) Once verified, you can now select the sub-system you want to access.</label>
+                </div>
+                <div class="col-md-12" id="bulletincnt_">
+                    <img src="<?php echo base_url().'assets/images/tutorial/select.png'?>" alt="User" style="width:100%">
+                </div>
+            </div>
+		</div>	
+
+      </div>
+
+      <div class="modal-footer">
+ <!--Nothing Goes Here but is needed! -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal -->
+
 <script type="text/javascript">
     $(".inputs").keyup(function () {
     if (this.value.length == this.maxLength) {
@@ -123,4 +227,103 @@
             }
     });
     
+
+    // modal for instructions
+    $(window).on('load', function() {
+        $('#myModal').modal('show');
+    });
+
+    $(document).ready(function() {
+    prep_modal();
+    });
+
+    function prep_modal()
+    {
+    $(".modal").each(function() {
+
+    var element = this;
+        var pages = $(this).find('.modal-split');
+
+    if (pages.length != 0)
+    {
+            pages.hide();
+            pages.eq(0).show();
+
+            var b_button = document.createElement("button");
+                    b_button.setAttribute("type","button");
+                        b_button.setAttribute("class","btn btn-primary");
+                        b_button.setAttribute("style","display: none;");
+                        b_button.innerHTML = "Back";
+
+            var n_button = document.createElement("button");
+                    n_button.setAttribute("type","button");
+                        n_button.setAttribute("class","btn btn-primary");
+                        n_button.innerHTML = "Next";
+
+            $(this).find('.modal-footer').append(b_button).append(n_button);
+
+
+            var page_track = 0;
+
+            $(n_button).click(function() {
+                if($(n_button).text() == "Finish"){
+                    $('#myModal').modal('hide');
+                }
+            
+            this.blur();
+
+                if(page_track == 0)
+                {
+                    $(b_button).show();
+                }
+
+                if(page_track == pages.length-2)
+                {
+                    $(n_button).text("Finish");
+                }
+
+            if(page_track == pages.length-1)
+            {
+            $(element).find("form").submit();
+            }
+
+                if(page_track < pages.length-1)
+                {
+                    page_track++;
+
+                    pages.hide();
+                    pages.eq(page_track).show();
+                }
+
+
+            });
+
+            $(b_button).click(function() {
+
+                if(page_track == 1)
+                {
+                    $(b_button).hide();
+                }
+
+                if(page_track == pages.length-1)
+                {
+                    $(n_button).text("Next");
+                }
+
+                if(page_track > 0)
+                {
+                    page_track--;
+
+                    pages.hide();
+                    pages.eq(page_track).show();
+                }
+
+
+            });
+
+    }
+
+    });
+    }
 </script>
+

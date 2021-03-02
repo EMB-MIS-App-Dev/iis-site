@@ -49,6 +49,15 @@ class Ssocontroller extends CI_Controller
         $this->db->where('iis_id', $email);
         $this->db->update('sso_tb', $data);
 
+        // get mobile number
+        // $where = array('sec.userid' => $email );
+		// $queryselect = $this->Embismodel->selectdata('acc_credentials AS sec','sec.cell_no',$where);
+
+        // $response = json_encode($queryselect);
+
+        // $res = json_decode($response, true);
+        // $number = ($res[0]['cell_no']);
+
         // SMS DETAILS
         $number = '639760129599';
         $msg = "***THIS+IS+AUTOMATICALLY+GENERATED+SMS,+PLEASE+DO+NOT+REPLY***%0A%0AYour+One+Time+Password+is:+".$randtoken."";
@@ -56,6 +65,7 @@ class Ssocontroller extends CI_Controller
         $api = file_get_contents("https://sms.mybusybee.net/app/smsapi/index.php?key=5d8326d9b8de4&type=text&title=updateprofile&contacts=".$number."&senderid=DENR-EMB&msg=".$msg."");
         
         // echo $api;
+        $this->session->set_flashdata('flashmsg', 'OTP sent to SMS!');
         $url = $_SERVER['HTTP_REFERER'];
         redirect($url);
     }
@@ -121,7 +131,7 @@ class Ssocontroller extends CI_Controller
         }
        
         // echo json_encode($msg);
-       
+        $this->session->set_flashdata('flashmsg', 'OTP sent to Email!');
         $url = $_SERVER['HTTP_REFERER'];
         redirect($url);
     }
