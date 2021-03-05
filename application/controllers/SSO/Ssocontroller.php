@@ -23,16 +23,21 @@ class Ssocontroller extends CI_Controller
     {
         $iisid = $this->session->userdata('userid');
         $where = array('sec.userid' => $iisid);
-        $queryselect = $this->Embismodel->selectdata('acc_credentials AS sec','sec.is_updated',$where);
+        $queryselect = $this->Embismodel->selectdata('acc_credentials AS sec','sec.*',$where);
         $response = json_encode($queryselect);
 
         $res = json_decode($response, true);
         $is_updated = ($res[0]['is_updated']);
 
+
+        $data['email'] = ($res[0]['email']);
+        $data['number'] = ($res[0]['cell_no']);
+
         if($is_updated == "0"){
+
             $this->load->library('session');
             $this->load->view('includes/login/header');
-            $this->load->view('sso/update');
+            $this->load->view('sso/update', $data);
             $this->load->view('includes/login/footer');
         }else{
             $this->emailtoken();
@@ -316,16 +321,29 @@ class Ssocontroller extends CI_Controller
     }
 
     function update_accountinfo(){
-        // print_r($this->input->post());
         $iisid = $this->session->userdata('userid');
-        $update_email = $this->Embismodel->updatedata(array('email' => $this->input->post('email'), 'cell_no' => $this->input->post('cell_no'), 'is_updated' => 1), 'acc_credentials', array('userid' =>  $iisid) );
-        // echo $update_email; 
-        if($update_email){
-            $this->emailtoken();
+        $where = array('sec.userid' => $iisid);
+        $queryselect = $this->Embismodel->selectdata('acc_credentials AS sec','sec.*',$where);
+        $response = json_encode($queryselect);
+
+        $res = json_decode($response, true);
+        $is_updated = ($res[0]['is_updated']);
+
+        if($is_updated == "0"){
+
+            // print_r($this->input->post());
+            $iisid = $this->session->userdata('userid');
+            $update_email = $this->Embismodel->updatedata(array('email' => $this->input->post('email'), 'cell_no' => $this->input->post('cell_no'), 'is_updated' => 1), 'acc_credentials', array('userid' =>  $iisid) );
+            // echo $update_email; 
+            if($update_email){
+                $this->emailtoken();
+            }else{
+                $this->session->set_flashdata('flashmsg', 'No Connection!');
+                $url = $_SERVER['HTTP_REFERER'];
+                redirect($url);
+            }
         }else{
-            $this->session->set_flashdata('flashmsg', 'No Connection!');
-            $url = $_SERVER['HTTP_REFERER'];
-		    redirect($url);
+            $this->emailtoken();
         }
 
     }

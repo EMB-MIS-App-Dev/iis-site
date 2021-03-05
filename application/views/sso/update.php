@@ -32,7 +32,10 @@
     margin: 40px auto;
     text-align: center;
     }
-    
+    #errmsg
+    {
+    color: red;
+    }
 </style>
 
 <div class="limiter">
@@ -47,6 +50,7 @@
 
     <!-- <form class="" action="<?php echo base_url(); ?>emailtoken" method="post"> -->
       <div class="wrap-login100 p-l-50 p-r-50 p-t-50 p-b-30">
+      <!-- <?=form_open_multipart(base_url('update_accountinfo'))?> -->
         <form action="<?= base_url('update_accountinfo'); ?>" method="post" accept-charset="utf-8">
             <!-- <form class="login100-form validate-form "> -->
             <span class="login100-form-title p-b-40">
@@ -62,11 +66,12 @@
                 <!-- <div class="row"> -->
                 
                        
-                <input class="form-control" type="email" name="email" placeholder="Email Address" required>
+                <input class="form-control" type="email" value="<?php echo $email; ?>" name="email" placeholder="Email Address" required>
 
                 <div class="input-group">
                     <span class="input-group-addon">+63</span>
-                    <input type="number" name="cell_no" class="form-control" placeholder="ex. 9191234567" aria-label="number"  maxlength="10" size="10" required>
+                    <input type="text" maxlength="10" value="<?php echo $number; ?>" name="cell_no" id="cell_no" class="form-control" placeholder="ex. 9191234567" aria-label="number" required>
+                    &nbsp;<span id="errmsg"></span>
                 </div>
 
                 <!-- </div> -->
@@ -103,5 +108,19 @@
         </form>
   </div>
 </div>
+
+<script>
+$(document).ready(function () {
+  //called when key is pressed in textbox
+  $("#cell_no").keypress(function (e) {
+     //if the letter is not digit then display error and don't type anything
+     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //display error message
+        $("#errmsg").html("Digits Only").show().fadeOut("slow");
+               return false;
+    }
+   });
+});
+</script>
 
 
