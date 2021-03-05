@@ -25,7 +25,7 @@
     </div>
 
     <!-- <form class="" action="<?php //echo base_url(); ?>Index/login" method="post"> -->
-      <div class="wrap-login100 p-l-50 p-r-50 p-t-50 p-b-30">
+      <div class="wrap-login100 p-l-50 p-r-50 p-t-50 p-b-30" style="width: auto">
       <form class="login100-form validate-form">
         <span class="login100-form-title p-b-40">
           <span style="color:green;">ENVIRONMENTAL MANAGEMENT BUREAU</span>
@@ -38,7 +38,7 @@
 
 
         <!-- ------------------------ SUBSYSTEMS ------------------------ -->
-            <div class="w3-card-4" style="width:50%; padding: 10px;">
+            <div class="w3-card-3" style="width:10%; height:10% padding: 10px;">
                 <a href="<?php echo base_url('dashboard')?>">
                     <img src="<?php echo base_url().'assets/images/systems/iis.png'?>" alt="User" style="width:100%">
                     <div class="w3-container w3-center">
@@ -50,7 +50,7 @@
             
             <?php foreach ($getsub as $gs): ?>
                 <?php if ($gs['iis_id'] == $this->session->userdata('userid')): ?>
-                    <div class="w3-card-4" style="width:50%; padding: 10px;">
+                    <div class="w3-card-3" style="width:10%; height:10% padding: 10px;">
 
                     <?php
                     if($gs['subsys_id'] == "PCB"){
