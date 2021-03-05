@@ -21,8 +21,8 @@
                   <td>
                     <select class='form-control' name="selSubsystem" id="selSubsystem">
                         <option value="" selected="true">Select</option>
-                        <option value="PCB|pcb.emb.gov.ph/|<?php echo base_url().'assets/images/systems/pcb.png'?>" >PCB</option>
-                        <option value="HWMS|https://hwms.emb.gov.ph/home|<?php echo base_url().'assets/images/systems/hwms.png'?>" >HWMS</option>
+                        <option value="PCB|pcb.emb.gov.ph/|<?php echo base_url().'assets/images/systems/PCB.png'?>" >PCB</option>
+                        <option value="HWMS|https://hwms.emb.gov.ph/home|<?php echo base_url().'assets/images/systems/HWMS.png'?>" >HWMS</option>
                     </select>
                   </td>
                   <td><input type="text" name="txtnickname" id="nickname" placeholder="Nickname" class="form-control"  required/></td>
