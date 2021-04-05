@@ -27,12 +27,12 @@
     }
 
     .alert.alert-info, .button
-    { 
-    max-width: 600px; 
+    {
+    max-width: 600px;
     margin: 40px auto;
     text-align: center;
     }
-    
+
 </style>
 
 <div class="limiter">
@@ -62,7 +62,7 @@
                     <p>
                         Part of improving the system security, we are implementing the two-factor authentication. Click from the button below to recieve the confirmation code.
                     </p>
-            
+
                     <button type="submit" class="btn btn-primary btn-sm" value="email" name="action" class="btn btn-primary btn-md">
                       <span class="text"> Send via Email</span>
                     </button>
@@ -71,10 +71,10 @@
                       <span class="text">Send via SMS</span>
                     </button>
 
-                    <!-- <a type="button" class="btn btn-primary btn-sm" href="<?php echo base_url('sendtoken/').$userid; ?>">   
+                    <!-- <a type="button" class="btn btn-primary btn-sm" href="<?php echo base_url('sendtoken/').$userid; ?>">
                     Send via Email
                     </a>
-                    <a type="button" class="btn btn-primary btn-sm" href="<?php echo base_url('sendtokensms/').$userid; ?>">   
+                    <a type="button" class="btn btn-primary btn-sm" href="<?php echo base_url('sendtokensms/').$userid; ?>">
                     Send via SMS
                     </a> -->
                     <div style="text-align:left">
@@ -82,7 +82,7 @@
                         <p>Mobile no.: <select name="numbs" id="numbs">
                                             <?php foreach($number as $nm) : ?>
                                                 <option value="<?php echo $nm['number']; ?>" ><?php echo '******' . substr($nm['number'], -4); ?></option>
-                                                
+
                                             <?php endforeach; ?>
                                         </select>
                         </p>
@@ -96,22 +96,22 @@
 
             <div>
                 <div class="row SMSArea">
-                    
+
                         <input style="width: 50px; margin: 6px" type="text" name="input1" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" autocomplete="off" />
-                    
+
                         <input style="width: 50px; margin: 6px" type="text" name="input2" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" autocomplete="off" />
-                    
+
                         <input style="width: 50px; margin: 6px" type="text" name="input3" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" autocomplete="off" />
-                    
+
                         <input style="width: 50px; margin: 6px" type="text" name="input4" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" autocomplete="off" />
-                    
+
                         <input style="width: 50px; margin: 6px" type="text" name="input5" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" autocomplete="off" />
-                    
+
                         <input style="width: 50px; margin: 6px" type="text" name="input6" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg inputs" autocomplete="off" />
                 </div>
             </div>
 
-            <?php if($this->session->flashdata('flashmsg')): ?> 
+            <?php if($this->session->flashdata('flashmsg')): ?>
                 <span style="color:green; text-align: center; font-size: 20px;">
                     <p style='color: red'><?php echo $this->session->flashdata('flashmsg'); ?></p>
                 </span>
@@ -120,7 +120,7 @@
             <span class="login100-form-title p-b-40" >
                 <!-- <span style="color:green; text-align: center; font-size: 20px;">
                     <a type="button" class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>Index/logout_user">
-                        Back         
+                        Back
                     </a>
                 </span> -->
                 <span style="color:green; text-align: center; font-size: 20px;">
@@ -129,17 +129,21 @@
                     </button>
                 </span>
             </span>
+
+            <p style="text-align: center;">
+               For any inquiries or concerns please contact support@emb.gov.ph.
+            </p>
             <!-- <span class="login100-form-title p-b-40" >
                 <span style="color:green; text-align: center; font-size: 20px;">
                 <?php $userid=$this->session->userdata('userid'); ?>
                     <a href="<?php echo base_url('sendtoken/').$userid; ?>">
-                        Resend code         
+                        Resend code
                     </a>
                 </span>
             </span> -->
-            
 
-        
+
+
         </form>
   </div>
 </div>
@@ -147,14 +151,14 @@
 <!-- modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-lg" role="document">
-    
+
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Single Sign-on (SSO)</h4>
-      
+
       </div>
-      
+
       <div class="modal-body">
 	  <div class="modal-split">
             <div class="row">
@@ -174,7 +178,7 @@
                 </div>
             </div>
 		</div>
-		
+
 		<div class="modal-split">
         <div class="row">
                 <div class="col-md-12" id="bulletincnt_">
@@ -185,7 +189,7 @@
                 </div>
             </div>
 		</div>
-		
+
 		<div class="modal-split">
         <div class="row">
                 <div class="col-md-12" id="bulletincnt_">
@@ -199,7 +203,7 @@
                     <img src="<?php echo base_url().'assets/images/tutorial/enrollment1.png'?>" alt="User" style="width:100%">
                 </div>
             </div>
-		</div>	
+		</div>
         <div class="modal-split">
             <div class="row">
                 <div class="col-md-12" id="bulletincnt_">
@@ -209,7 +213,7 @@
                     <img src="<?php echo base_url().'assets/images/tutorial/enrollment2.png'?>" alt="User" style="width:100%">
                 </div>
             </div>
-		</div>	
+		</div>
         <div class="modal-split">
             <div class="row">
                 <div class="col-md-12" id="bulletincnt_">
@@ -219,7 +223,7 @@
                     <img src="<?php echo base_url().'assets/images/tutorial/otp.png'?>" alt="User" style="width:100%">
                 </div>
             </div>
-		</div>	
+		</div>
         <div class="modal-split">
             <div class="row">
                 <div class="col-md-12" id="bulletincnt_">
@@ -229,7 +233,7 @@
                     <img src="<?php echo base_url().'assets/images/tutorial/select.png'?>" alt="User" style="width:100%">
                 </div>
             </div>
-		</div>	
+		</div>
 
       </div>
 
@@ -290,7 +294,7 @@
                 if($(n_button).text() == "Finish"){
                     $('#myModal').modal('hide');
                 }
-            
+
             this.blur();
 
                 if(page_track == 0)
@@ -347,4 +351,3 @@
     });
     }
 </script>
-

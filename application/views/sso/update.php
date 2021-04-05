@@ -1,4 +1,4 @@
-<style type="text/css">
+\<style type="text/css">
   i#info{
     color: orange;
   }
