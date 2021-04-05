@@ -67,14 +67,27 @@
                 
                        
                 <input class="form-control" type="email" value="<?php echo $email; ?>" name="email" placeholder="Email Address" required>
-
-                <div class="input-group">
+               
+                <!-- <div class="input-group">
                     <span class="input-group-addon">+63</span>
                     <input type="text" maxlength="10" value="<?php echo $number; ?>" name="cell_no" id="cell_no" class="form-control" placeholder="ex. 9191234567" aria-label="number" required>
                     &nbsp;<span id="errmsg"></span>
-                </div>
+                </div> -->
 
                 <!-- </div> -->
+
+                <table class="table table-bordered table-hover" id="dynamic_field">
+                <tr>
+                    <td>
+                        <div class="input-group">
+                            <span class="input-group-addon">+63</span>
+                            <input type="text" maxlength="10" value="<?php echo $number; ?>" name="cell_no[]" id="cell_no" class="form-control" placeholder="ex. 9191234567" aria-label="number" required>
+                            &nbsp;<span id="errmsg"></span>
+                        </div>
+                    </td>
+                    <td><button type="button" name="add" id="add" class="btn btn-primary">Add More</button></td>  
+                </tr>
+                </table>
             </div>
 
             <?php if($this->session->flashdata('flashmsg')): ?> 
@@ -120,6 +133,20 @@ $(document).ready(function () {
                return false;
     }
    });
+
+
+   
+    var i = 1;
+
+    $("#add").click(function(){
+    i++;
+    $('#dynamic_field').append('<tr id="row'+i+'"><td><div class="input-group"><span class="input-group-addon">+63</span><input type="text" maxlength="10" name="cell_no[]" id="cell_no" class="form-control" placeholder="ex. 9191234567" aria-label="number" required>&nbsp;<span id="errmsg"></span></div></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
+    });
+
+    $(document).on('click', '.btn_remove', function(){  
+    var button_id = $(this).attr("id");   
+    $('#row'+button_id+'').remove();  
+    });
 });
 </script>
 

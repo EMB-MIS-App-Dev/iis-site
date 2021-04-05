@@ -54,7 +54,7 @@
             </span>
 
             <!-- ---------------------------- select sub system ---------------------------- -->
-            <span class="login100-form-title p-b-40" >
+            <span class="login100-form-title" >
 
             <span class="login100-form-title p-b-40" >
                 <span style="color:green; text-align: center; font-size: 20px;">
@@ -62,13 +62,31 @@
                     <p>
                         Part of improving the system security, we are implementing the two-factor authentication. Click from the button below to recieve the confirmation code.
                     </p>
-                    <a type="button" class="btn btn-primary btn-sm" href="<?php echo base_url('sendtoken/').$userid; ?>">   
+            
+                    <button type="submit" class="btn btn-primary btn-sm" value="email" name="action" class="btn btn-primary btn-md">
+                      <span class="text"> Send via Email</span>
+                    </button>
+
+                    <button type="submit" class="btn btn-primary btn-sm" value="sms" name="action" class="btn btn-primary btn-md">
+                      <span class="text">Send via SMS</span>
+                    </button>
+
+                    <!-- <a type="button" class="btn btn-primary btn-sm" href="<?php echo base_url('sendtoken/').$userid; ?>">   
                     Send via Email
                     </a>
-
                     <a type="button" class="btn btn-primary btn-sm" href="<?php echo base_url('sendtokensms/').$userid; ?>">   
                     Send via SMS
-                    </a>
+                    </a> -->
+                    <div style="text-align:left">
+                        <p>Email: <?php echo $email = substr($email,0,2). '******' . substr( $email, strpos($email,'@')); ?></p>
+                        <p>Mobile no.: <select name="numbs" id="numbs">
+                                            <?php foreach($number as $nm) : ?>
+                                                <option value="<?php echo $nm['number']; ?>" ><?php echo '******' . substr($nm['number'], -4); ?></option>
+                                                
+                                            <?php endforeach; ?>
+                                        </select>
+                        </p>
+                    </div>
                 </span>
             </span>
 
@@ -106,7 +124,7 @@
                     </a>
                 </span> -->
                 <span style="color:green; text-align: center; font-size: 20px;">
-                    <button type="submit" class="btn btn-primary btn-md">
+                    <button type="submit" value="continue" name="action" id="cont" class="btn btn-primary btn-md">
                       <span class="text">Continue</span>
                     </button>
                 </span>
@@ -225,12 +243,11 @@
 
 <script type="text/javascript">
     $(".inputs").keyup(function () {
-    if (this.value.length == this.maxLength) {
+        if (this.value.length == this.maxLength) {
             $(this).next('.inputs').focus();
             $(this).next('.inputs').select();
-            }
+        }
     });
-    
 
     // modal for instructions
     $(window).on('load', function() {

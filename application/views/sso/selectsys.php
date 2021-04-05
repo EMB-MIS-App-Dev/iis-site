@@ -38,14 +38,16 @@
 
 
         <!-- ------------------------ SUBSYSTEMS ------------------------ -->
-            <div class="w3-card-3" style="width:10%; height:10% padding: 10px;">
+            <span class="login100-form-title p-b-40" >
+              <span style="color:green; text-align: center; font-size: 20px;">
                 <a href="<?php echo base_url('dashboard')?>">
-                    <img src="<?php echo base_url().'assets/images/systems/iis.png'?>" alt="User" style="width:100%">
+                    <img src="<?php echo base_url().'assets/images/systems/iis.png'?>" alt="User" style="width:20%">
                     <div class="w3-container w3-center">
                     <p style="text-align: center"><b>IIS</b></p>
                     </div>
                 </a>
-            </div>
+              </span>
+            </span>
 
             
             <?php foreach ($getsub as $gs): ?>

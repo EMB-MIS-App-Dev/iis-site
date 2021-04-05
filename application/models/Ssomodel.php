@@ -19,5 +19,10 @@ class Ssomodel extends CI_Model{
         $this->db->delete('sso_tb');
     }
 
+    public function view_mobile($id){
+        $query = $this->db->get_where('sso_number', array('iis_id' => $id));
+        return $query->result_array();
+    }
+
 }
 ?>

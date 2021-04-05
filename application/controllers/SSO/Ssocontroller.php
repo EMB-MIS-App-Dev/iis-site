@@ -42,15 +42,31 @@ class Ssocontroller extends CI_Controller
         }else{
             $this->emailtoken();
         }
-        
+
     }
 
 
     function emailtoken()
     {
+
+        $iisid = $this->session->userdata('userid');
+        $where = array('sec.userid' => $iisid);
+        $queryselect = $this->Embismodel->selectdata('acc_credentials AS sec','sec.*',$where);
+        $response = json_encode($queryselect);
+
+        $res = json_decode($response, true);
+        $is_updated = ($res[0]['is_updated']);
+
+
+        $data['email'] = ($res[0]['email']);
+        // $data['number'] = ($res[0]['cell_no']);
+        $data['number'] = $this->Ssomodel->view_mobile($iisid);
+
+
+        // echo json_encode($data['number']);
         $this->load->library('session');
         $this->load->view('includes/login/header');
-        $this->load->view('sso/emailtoken');
+        $this->load->view('sso/emailtoken', $data);
         $this->load->view('includes/login/footer');
     }
 
@@ -59,42 +75,9 @@ class Ssocontroller extends CI_Controller
             'otp' => ''
         );
 
-        $this->db->where('iis_id', $email);
-        $this->db->update('sso_tb', $data);
-    
-    }
+        $this->db->where('userid', $email);
+        $this->db->update('acc_credentials', $data);
 
-    function sendtokensms($email){
-        // get otp token
-        $str_result = '0123456789'; 
-		$randtoken = substr(str_shuffle($str_result), 0, 6); 
-
-        $data = array(
-            'otp' => $randtoken
-        );
-
-        $this->db->where('iis_id', $email);
-        $this->db->update('sso_tb', $data);
-
-        // get mobile number
-        $where = array('sec.userid' => $email );
-		$queryselect = $this->Embismodel->selectdata('acc_credentials AS sec','sec.cell_no',$where);
-
-        $response = json_encode($queryselect);
-
-        $res = json_decode($response, true);
-        $number = ($res[0]['cell_no']);
-
-        // SMS DETAILS
-        // $number = '639760129599';
-        $msg = "***THIS+IS+AUTOMATICALLY+GENERATED+SMS,+PLEASE+DO+NOT+REPLY***%0A%0AYour+One+Time+Password+is:+".$randtoken."";
-
-        $api = file_get_contents("https://sms.mybusybee.net/app/smsapi/index.php?key=5d8326d9b8de4&type=text&title=updateprofile&contacts=".$number."&senderid=DENR-EMB&msg=".$msg."");
-        
-        // echo $api;
-        $this->session->set_flashdata('flashmsg', 'OTP sent to SMS!');
-        $url = $_SERVER['HTTP_REFERER'];
-        redirect($url);
     }
 
     function sendtoken($email){
@@ -113,15 +96,15 @@ class Ssocontroller extends CI_Controller
 
 
         // get otp token
-        $str_result = '0123456789'; 
-		$randtoken = substr(str_shuffle($str_result), 0, 6); 
+        $str_result = '0123456789';
+		$randtoken = substr(str_shuffle($str_result), 0, 6);
 
         $data = array(
             'otp' => $randtoken
         );
 
-        $this->db->where('iis_id', $email);
-        $this->db->update('sso_tb', $data);
+        $this->db->where('userid', $email);
+        $this->db->update('acc_credentials', $data);
 
 
         // ------------------- SEND EMAIL ----------------------
@@ -139,12 +122,12 @@ class Ssocontroller extends CI_Controller
         $message .= "<h1>Your One Time Password is: ".$randtoken."</h1><br><br>";
         $message .= "If you have any concerns and issues, please don't hesitate to contuct us <u><i>support@emb.gov.ph</i></u>.<br><br>";
         $message .= "Thank you!";
-       
+
 
         $this->email->set_newline("\r\n");
         $this->email->set_mailtype('html');
         // $this->email->from($from);
-        $this->email->from('r7support@emb.gov.ph', 'EMB - IIS');
+        $this->email->from('notification@emb.gov.ph', 'EMB - IIS');
         $this->email->to($to);
         $this->email->subject($subject);
         $this->email->message($message);
@@ -156,7 +139,7 @@ class Ssocontroller extends CI_Controller
         }else {
             $msg['msg'] = $this->email->print_debugger();
         }
-       
+
         // echo json_encode($msg);
         $this->session->set_flashdata('flashmsg', 'OTP sent to Email!');
         $url = $_SERVER['HTTP_REFERER'];
@@ -164,38 +147,84 @@ class Ssocontroller extends CI_Controller
     }
 
     function emailtokenverify(){
-        $txt1 = $this->input->post('input1');
-        $txt2 = $this->input->post('input2');
-        $txt3 = $this->input->post('input3');
-        $txt4 = $this->input->post('input4');
-        $txt5 = $this->input->post('input5');
-        $txt6 = $this->input->post('input6');
 
-        $input_token = $txt1.$txt2.$txt3.$txt4.$txt5.$txt6;
-//token from email 
+        if ($_POST['action'] == 'continue') {
 
-        
-        $query  = $this->db->get_where('sso_tb', array('iis_id' => 1));
-        $row = $query->row();
+            $txt1 = $this->input->post('input1');
+            $txt2 = $this->input->post('input2');
+            $txt3 = $this->input->post('input3');
+            $txt4 = $this->input->post('input4');
+            $txt5 = $this->input->post('input5');
+            $txt6 = $this->input->post('input6');
 
-        if($input_token ==  $row->otp){
-            $this->removetoken($this->session->userdata('userid'));
-            
-            // session for verification if logged in for IIS
-            $_SESSION["loginsystem"] = 1;
+            $input_token = $txt1.$txt2.$txt3.$txt4.$txt5.$txt6;
+            //token from email
 
-            $data['getsub'] =  $this->Ssomodel->fetch_subsys();
-            $this->load->library('session');
-            $this->load->view('includes/login/header');
-            $this->load->view('sso/selectsys', $data);
-            $this->load->view('includes/login/footer');
-           
-        }else{
-            $this->session->set_flashdata('flashmsg', 'Invalid Code!');
-            $url = $_SERVER['HTTP_REFERER'];
-            redirect($url);
-   
+
+            $query  = $this->db->get_where('acc_credentials', array('userid' => $this->session->userdata('userid')));
+            $row = $query->row();
+
+            if($input_token == ""){
+                $this->session->set_flashdata('flashmsg', 'Invalid Code!');
+                $url = $_SERVER['HTTP_REFERER'];
+                redirect($url);
+            }else if($input_token ==  $row->otp){
+                $this->removetoken($this->session->userdata('userid'));
+
+                // session for verification if logged in for IIS
+                $_SESSION["loginsystem"] = 1;
+
+                $data['getsub'] =  $this->Ssomodel->fetch_subsys();
+                $this->load->library('session');
+                $this->load->view('includes/login/header');
+                $this->load->view('sso/selectsys', $data);
+                $this->load->view('includes/login/footer');
+
+            }else{
+                $this->session->set_flashdata('flashmsg', 'Invalid Code!');
+                $url = $_SERVER['HTTP_REFERER'];
+                redirect($url);
+
+            }
+        } else if ($_POST['action'] == 'email') {
+            $iisid = $this->session->userdata('userid');
+            $this->sendtoken($iisid);
+        } else {
+            $iisid = $this->session->userdata('userid');
+              // get otp token
+                $str_result = '0123456789';
+                $randtoken = substr(str_shuffle($str_result), 0, 6);
+
+                $data = array(
+                    'otp' => $randtoken
+                );
+
+                $this->db->where('userid', $iisid);
+                $this->db->update('acc_credentials', $data);
+
+                // get mobile number
+                // $where = array('sec.userid' => $email );
+                // $queryselect = $this->Embismodel->selectdata('acc_credentials AS sec','sec.cell_no',$where);
+
+                // $response = json_encode($queryselect);
+
+                // $res = json_decode($response, true);
+                // $number = ($res[0]['cell_no']);
+                $number = '63'.$this->input->post('numbs');
+
+
+                // SMS DETAILS
+                // $number = '639760129599';
+                $msg = "***THIS+IS+AUTOMATICALLY+GENERATED+SMS,+PLEASE+DO+NOT+REPLY***%0A%0AYour+One+Time+Password+is:+".$randtoken."";
+
+                $api = file_get_contents("https://sms.mybusybee.net/app/smsapi/index.php?key=5d8326d9b8de4&type=text&title=updateprofile&contacts=".$number."&senderid=DENR-EMB&msg=".$msg."");
+
+                // echo $api;
+                $this->session->set_flashdata('flashmsg', 'OTP sent to SMS!');
+                $url = $_SERVER['HTTP_REFERER'];
+                redirect($url);
         }
+
     }
 
     function enrollment()
@@ -214,7 +243,7 @@ class Ssocontroller extends CI_Controller
 
         $result = $this->input->post('selSubsystem');
         $result_explode = explode('|', $result);
-        
+
         $subsys = $result_explode[0];
         $subsyslink = $result_explode[1];
         $subsysimg = $result_explode[2];
@@ -266,12 +295,12 @@ class Ssocontroller extends CI_Controller
                 'Content-Type: application/json',
                 sprintf('Authorization: Bearer %s', 'sh4PgSyLRvBUax1wznv6tpICeC101Dj24btQuWRGj5ck6RDpaP3WypLpiSlL')
              ));
-           
-           
-                $response = curl_exec($ch);  
-               
+
+
+                $response = curl_exec($ch);
+
             curl_close($ch);
-  
+
             $res = json_decode($response, true);
             $status = ($res[0]['status']);
             $message = ($res[0]['message']);
@@ -305,7 +334,7 @@ class Ssocontroller extends CI_Controller
 
         $url = $_SERVER['HTTP_REFERER'];
         redirect($url);
-   
+
     }
 
     function getsubsys(){
@@ -315,7 +344,7 @@ class Ssocontroller extends CI_Controller
 
     function remsubsys($id){
         $this->Ssomodel->rem_subsys($id);
-        
+
         $url = $_SERVER['HTTP_REFERER'];
 		redirect($url);
     }
@@ -331,17 +360,42 @@ class Ssocontroller extends CI_Controller
 
         if($is_updated == "0"){
 
-            // print_r($this->input->post());
             $iisid = $this->session->userdata('userid');
-            $update_email = $this->Embismodel->updatedata(array('email' => $this->input->post('email'), 'cell_no' => $this->input->post('cell_no'), 'is_updated' => 1), 'acc_credentials', array('userid' =>  $iisid) );
-            // echo $update_email; 
-            if($update_email){
-                $this->emailtoken();
-            }else{
-                $this->session->set_flashdata('flashmsg', 'No Connection!');
-                $url = $_SERVER['HTTP_REFERER'];
-                redirect($url);
+            // $update_email = $this->Embismodel->updatedata(array('email' => $this->input->post('email'), 'cell_no' => $this->input->post('cell_no'), 'is_updated' => 1), 'acc_credentials', array('userid' =>  $iisid) );
+            $update_email = $this->Embismodel->updatedata(array('email' => $this->input->post('email'), 'is_updated' => 1), 'acc_credentials', array('userid' =>  $iisid) );
+
+            // delete contact details
+            $this->db->where('iis_id', $iisid);
+            $this->db->delete('sso_number');
+
+            // insert contact details
+            $userData = count($_POST["cell_no"]);
+            if ($userData > 0) {
+                for ($i=0; $i < $userData; $i++) {
+                    if (trim($_POST['cell_no'] != '')) {
+                        $cell_no   = $_POST["cell_no"][$i];
+
+                        $data = array(
+                            'iis_id' => $iisid,
+                            'number' => $cell_no,
+                            'status' => '1',
+                        );
+
+                        $this->db->insert('sso_number', $data);
+
+                    }
+                }
             }
+
+
+            $this->emailtoken();
+            // if($update_email){
+            //     $this->emailtoken();
+            // }else{
+            //     $this->session->set_flashdata('flashmsg', 'No Connection!');
+            //     $url = $_SERVER['HTTP_REFERER'];
+            //     redirect($url);
+            // }
         }else{
             $this->emailtoken();
         }

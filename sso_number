@@ -1,0 +1,7 @@
+CREATE TABLE sso_number (
+    id INTEGER(20) AUTO_INCREMENT NOT NULL,
+    iis_id VARCHAR(200),
+    number VARCHAR(200),
+    status VARCHAR(200),
+    PRIMARY KEY (id)
+);

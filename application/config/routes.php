@@ -69,6 +69,7 @@ $route['dms/documents/migrate/(:num)'] = 'Dms/migrate';
 $route['dms/documents'] = 'Dms/Main';
 $route['dms/documents/(:any)'] = 'Dms/Main';
 $route['dms/documents/(:any)/(:any)'] = 'Dms/Main';
+$route['dms/documents/fileviewer/(:any)/(:any)/(:any)/(:any)'] = 'Dms/fileviewer';
 
 $route['dms/data/ajax/(:any)'] = 'Dms/Ajax_Data/$1';
 // $route['dms/forms/(:any)'] = 'Dms/Form_Data/$1';
@@ -86,6 +87,7 @@ $route['travel/allapproved'] = 'Travel/Dashboard/Allapproved';
 
 $route['administrative/userlist'] = 'Admin/User_accounts/User_list';
 $route['administrative/uploads'] = 'Admin/Uploads';
+$route['administrative/sso-contacts'] = 'Admin/User_accounts/sso_account_contacts';
 
 $route['schedule/dashboard'] = 'Schedule/Dashboard/Index';
 
@@ -115,8 +117,11 @@ $route['company/for_approval'] = 'Company/Company_list/for_approval_company_requ
 $route['company/disapproved'] = 'Company/Company_list/disapproved_company_request';
 
 $route['support/tickets'] = 'Support/Emb_support';
+$route['support/my_tickets'] = 'Support/Emb_support/admin_own_tickets';
+$route['support/utilities'] = 'Support/Emb_support/support_utility_list';
 $route['client/lists'] = 'Clients/Clients/userlist';
 $route['vehicle/tickets'] = 'Vehicle/Main';
+$route['support/faq'] = 'Support/Faq';
 
 
 $route['downloadables'] = 'Downloadables/Dashboard/index';
@@ -137,4 +142,3 @@ $route['emailtoken'] = "SSO/Ssocontroller/emailtoken";
 $route['emailtokenverify'] = "SSO/Ssocontroller/emailtokenverify";
 $route['sendtoken/(:any)'] = "SSO/Ssocontroller/sendtoken/$1";
 $route['sendtokensms/(:any)'] = "SSO/Ssocontroller/sendtokensms/$1";
-
