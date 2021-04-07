@@ -43,7 +43,7 @@ class Ssocontroller extends CI_Controller
 
             date_default_timezone_set('Asia/Manila');;
             $time_now = date('G:i:s');
-
+            $today = date("Y-m-d");
 
             $iisid = $this->session->userdata('userid');
             $where = array('sec.userid' => $iisid);
@@ -52,38 +52,44 @@ class Ssocontroller extends CI_Controller
             $res = json_decode($response, true);
 
             $data['otp_validity'] = ($res[0]['otp_validity']);
+            $data['otp_validity_date'] = ($res[0]['otp_validity_date']);
 
             // echo $data['otp_validity'];
             // echo "<br>";
             // echo $time_now; 
             // echo "<br>";
-           
-            if ( strtotime($data['otp_validity']) >= strtotime($time_now)) {
-                //set otp validity
-                date_default_timezone_set('Asia/Manila');;
-                $time = date('G:i:s', time()+60*60*3);
+            if(strtotime($today) == strtotime($data['otp_validity_date'])){
+                if ( strtotime($data['otp_validity']) >= strtotime($time_now)) {
+                    //set otp validity
+                    date_default_timezone_set('Asia/Manila');;
+                    $time = date('G:i:s', time()+60*60*3);
+                    $today = date("Y-m-d");
 
-                $data = array(
-                    'otp_validity' => $time
-                );
+                    $data = array(
+                        'otp_validity' => $time,
+                        'otp_validity_date' => $today
+                    );
 
-                $iisid = $this->session->userdata('userid');
-                $this->db->where('userid', $iisid);
-                $this->db->update('acc_credentials', $data);
-                
-                $this->removetoken($this->session->userdata('userid'));
+                    $iisid = $this->session->userdata('userid');
+                    $this->db->where('userid', $iisid);
+                    $this->db->update('acc_credentials', $data);
+                    
+                    $this->removetoken($this->session->userdata('userid'));
 
-                // session for verification if logged in for IIS
-                $_SESSION["loginsystem"] = 1;
+                    // session for verification if logged in for IIS
+                    $_SESSION["loginsystem"] = 1;
 
-                $data['getsub'] =  $this->Ssomodel->fetch_subsys();
-                $this->load->library('session');
-                $this->load->view('includes/login/header');
-                $this->load->view('sso/selectsys', $data);
-                $this->load->view('includes/login/footer');
-              }else{
+                    $data['getsub'] =  $this->Ssomodel->fetch_subsys();
+                    $this->load->library('session');
+                    $this->load->view('includes/login/header');
+                    $this->load->view('sso/selectsys', $data);
+                    $this->load->view('includes/login/footer');
+                }else{
                 $this->emailtoken();
-              }
+                }
+            }else{
+                $this->emailtoken();
+            }
 
         }
 
@@ -216,9 +222,11 @@ class Ssocontroller extends CI_Controller
                 //set otp validity
                 date_default_timezone_set('Asia/Manila');;
                 $time = date('G:i:s', time()+60*60*3);
+                $today = date("Y-m-d");
 
                 $data = array(
-                    'otp_validity' => $time
+                    'otp_validity' => $time,
+                    'otp_validity_date' => $today
                 );
 
                 $iisid = $this->session->userdata('userid');
