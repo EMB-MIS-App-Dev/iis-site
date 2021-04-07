@@ -40,7 +40,51 @@ class Ssocontroller extends CI_Controller
             $this->load->view('sso/update', $data);
             $this->load->view('includes/login/footer');
         }else{
-            $this->emailtoken();
+
+            date_default_timezone_set('Asia/Manila');;
+            $time_now = date('G:i:s');
+
+
+            $iisid = $this->session->userdata('userid');
+            $where = array('sec.userid' => $iisid);
+            $queryselect = $this->Embismodel->selectdata('acc_credentials AS sec','sec.*',$where);
+            $response = json_encode($queryselect);
+            $res = json_decode($response, true);
+
+            $data['otp_validity'] = ($res[0]['otp_validity']);
+
+            // echo $data['otp_validity'];
+            // echo "<br>";
+            // echo $time_now; 
+            // echo "<br>";
+           
+            if ( strtotime($data['otp_validity']) >= strtotime($time_now)) {
+                //set otp validity
+                date_default_timezone_set('Asia/Manila');;
+                $time = date('G:i:s', time()+60*60*3);
+
+                $data = array(
+                    'otp_validity' => $time
+                );
+
+                $iisid = $this->session->userdata('userid');
+                $this->db->where('userid', $iisid);
+                $this->db->update('acc_credentials', $data);
+                
+                $this->removetoken($this->session->userdata('userid'));
+
+                // session for verification if logged in for IIS
+                $_SESSION["loginsystem"] = 1;
+
+                $data['getsub'] =  $this->Ssomodel->fetch_subsys();
+                $this->load->library('session');
+                $this->load->view('includes/login/header');
+                $this->load->view('sso/selectsys', $data);
+                $this->load->view('includes/login/footer');
+              }else{
+                $this->emailtoken();
+              }
+
         }
 
     }
@@ -169,6 +213,18 @@ class Ssocontroller extends CI_Controller
                 $url = $_SERVER['HTTP_REFERER'];
                 redirect($url);
             }else if($input_token ==  $row->otp){
+                //set otp validity
+                date_default_timezone_set('Asia/Manila');;
+                $time = date('G:i:s', time()+60*60*3);
+
+                $data = array(
+                    'otp_validity' => $time
+                );
+
+                $iisid = $this->session->userdata('userid');
+                $this->db->where('userid', $iisid);
+                $this->db->update('acc_credentials', $data);
+                
                 $this->removetoken($this->session->userdata('userid'));
 
                 // session for verification if logged in for IIS
